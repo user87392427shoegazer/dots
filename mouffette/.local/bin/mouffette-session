@@ -1,0 +1,40 @@
+#!/bin/sh
+# mouffette-session: run mouffette inside a dbus session and start the desktop pieces.
+LOG="${XDG_STATE_HOME:-$HOME/.local/state}/jdm-rice/session.log"
+mkdir -p "$(dirname "$LOG")"
+
+if [ "${1:-}" != "--inner" ]; then
+    export XDG_SESSION_TYPE=wayland
+    export XDG_CURRENT_DESKTOP=mouffette
+    if [ -z "${XDG_RUNTIME_DIR:-}" ]; then
+        export XDG_RUNTIME_DIR="/tmp/runtime-$(id -u)"
+        mkdir -p "$XDG_RUNTIME_DIR"; chmod 700 "$XDG_RUNTIME_DIR"
+    fi
+    exec dbus-run-session -- "$0" --inner
+fi
+
+(
+    n=0
+    sock=""
+    while [ $n -lt 100 ]; do
+        for s in "$XDG_RUNTIME_DIR"/wayland-*; do
+            case "$s" in *.lock) continue ;; esac
+            [ -S "$s" ] && sock="$(basename "$s")" && break
+        done
+        [ -n "$sock" ] && break
+        n=$((n+1)); sleep 0.1
+    done
+    [ -n "$sock" ] || { echo "no wayland socket found" >> "$LOG"; exit 1; }
+    export WAYLAND_DISPLAY="$sock"
+
+    command -v pipewire       >/dev/null 2>&1 && pipewire       >>"$LOG" 2>&1 &
+    command -v wireplumber    >/dev/null 2>&1 && wireplumber    >>"$LOG" 2>&1 &
+    command -v pipewire-pulse >/dev/null 2>&1 && pipewire-pulse >>"$LOG" 2>&1 &
+    [ -f "$HOME/Pictures/wallpaper.png" ] && swaybg -i "$HOME/Pictures/wallpaper.png" -m fill >>"$LOG" 2>&1 &
+    dunst   >>"$LOG" 2>&1 &
+    sleep 0.5
+    waybar  >>"$LOG" 2>&1 &
+    wait
+) &
+
+exec mouffette

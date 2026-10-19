@@ -1,0 +1,27 @@
+[general]
+framerate = 60
+bars = 0
+bar_width = 1
+bar_spacing = 0
+sleep_timer = 5
+
+[input]
+method = pipewire
+source = auto
+
+[output]
+method = noncurses
+orientation = bottom
+channels = stereo
+
+[color]
+gradient = 1
+gradient_count = 3
+gradient_color_1 = '#4A2E2F'
+gradient_color_2 = '#7C5557'
+gradient_color_3 = '#9E7779'
+
+[smoothing]
+monstercat = 1
+waves = 0
+noise_reduction = 88

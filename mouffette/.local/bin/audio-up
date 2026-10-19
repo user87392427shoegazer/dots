@@ -1,0 +1,11 @@
+#!/bin/sh
+# starts the pipewire stack in the right order (called once from config.kdl autostart)
+log="${XDG_STATE_HOME:-$HOME/.local/state}/audio-up.log"
+mkdir -p "$(dirname "$log")"
+pgrep -x pipewire >/dev/null || pipewire >>"$log" 2>&1 &
+# wait up to 5s for the pipewire socket before starting the session manager
+i=0
+while [ ! -S "$XDG_RUNTIME_DIR/pipewire-0" ] && [ "$i" -lt 50 ]; do sleep 0.1; i=$((i+1)); done
+pgrep -x wireplumber >/dev/null || wireplumber >>"$log" 2>&1 &
+pgrep -x pipewire-pulse >/dev/null || pipewire-pulse >>"$log" 2>&1 &
+wait

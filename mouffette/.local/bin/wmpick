@@ -1,0 +1,30 @@
+#!/bin/sh
+# wmpick: choose a session from the tty.
+# Lists wayland-sessions/*.desktop, xsessions/*.desktop (via startx), and
+# "name|command" lines from ~/.config/wmpick/extra
+i=0
+add() { i=$((i+1)); eval "N$i=\$1; C$i=\$2"; printf '  %d) %s\n' "$i" "$1"; }
+
+printf '\n  start a session\n\n'
+for d in /usr/share/wayland-sessions/*.desktop; do
+    [ -f "$d" ] || continue
+    n="$(sed -n 's/^Name=//p' "$d" | head -n1)"; e="$(sed -n 's/^Exec=//p' "$d" | head -n1)"
+    [ -n "$n" ] && [ -n "$e" ] && add "$n" "$e"
+done
+for d in /usr/share/xsessions/*.desktop; do
+    [ -f "$d" ] || continue
+    n="$(sed -n 's/^Name=//p' "$d" | head -n1)"; e="$(sed -n 's/^Exec=//p' "$d" | head -n1)"
+    x="${e%% *}"
+    [ -n "$n" ] && [ -n "$x" ] && add "$n (X11)" "startx $(command -v "$x" 2>/dev/null || echo "$x")"
+done
+if [ -f "$HOME/.config/wmpick/extra" ]; then
+    while IFS='|' read -r n e; do
+        [ -n "$n" ] && [ -n "$e" ] && add "$n" "$e"
+    done < "$HOME/.config/wmpick/extra"
+fi
+printf '  0) stay in tty\n\n> '
+read -r ans || exit 0
+case "$ans" in ''|*[!0-9]*) exit 0 ;; esac
+[ "$ans" -ge 1 ] && [ "$ans" -le "$i" ] || exit 0
+eval "cmd=\$C$ans"
+exec sh -c "$cmd"

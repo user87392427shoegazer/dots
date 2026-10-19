@@ -1,0 +1,15 @@
+(defpoll vol :interval "2s" "wpctl get-volume @DEFAULT_AUDIO_SINK@ | awk '{print int($2*100)}'")
+(defpoll bat :interval "30s" "cat /sys/class/power_supply/BAT*/capacity | head -n1")
+(defpoll clk :interval "10s" "date +%H:%M")
+
+(defwindow bar
+  :monitor 0
+  :geometry (geometry :x "0px" :y "6px" :width "310px" :height "28px" :anchor "bottom center")
+  :stacking "fg"
+  :exclusive false
+  :focusable false
+  (box :class "bar" :space-evenly false :halign "fill" :hexpand true
+    (label :class "cell" :text "vol ${vol}")
+    (label :class "cell sep" :text "bat ${bat}")
+    (label :class "cell sep" :text clk)
+    (label :class "cell sep name" :hexpand true :text "ムフェット")))

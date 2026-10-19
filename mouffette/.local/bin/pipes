@@ -1,0 +1,2 @@
+#!/bin/sh
+exec pipes.sh -p 3 -t 3 -c 1 -c 5 -f 60 -r 0 -R "$@"

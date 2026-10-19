@@ -1,0 +1,2 @@
+#!/bin/sh
+exec lavat -c red -k red -s 3 "$@"

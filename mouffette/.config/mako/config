@@ -1,0 +1,24 @@
+font=Gallant Raster Term 11
+background-color=#170506
+text-color=#cab0a8
+border-color=#8f686a
+border-size=2
+border-radius=0
+padding=8
+margin=10
+width=280
+height=100
+anchor=top-right
+layer=overlay
+icons=0
+max-visible=3
+default-timeout=5000
+format=<b>%s</b>\n%b
+
+[urgency=low]
+border-color=#59393b
+text-color=#af8d8b
+
+[urgency=high]
+border-color=#b0585c
+default-timeout=0

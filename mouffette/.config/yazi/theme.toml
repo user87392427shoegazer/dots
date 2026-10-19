@@ -1,0 +1,128 @@
+# yazi: wallpaper maroon palette only (no ANSI colors, no glyph icons)
+[mgr]
+cwd = { fg = "#9E7779" }
+find_keyword  = { fg = "#C4A0A0", bold = true, italic = true, underline = true }
+find_position = { fg = "#9E7779", bg = "#0F0202", bold = true }
+symlink_target = { fg = "#7C5557", italic = true }
+marker_copied   = { fg = "#7C5557",  bg = "#7C5557" }
+marker_cut      = { fg = "#B86B6B", bg = "#B86B6B" }
+marker_marked   = { fg = "#C4A0A0",  bg = "#C4A0A0" }
+marker_selected = { fg = "#9E7779",  bg = "#9E7779" }
+count_copied   = { fg = "#0F0202", bg = "#7C5557" }
+count_cut      = { fg = "#0F0202", bg = "#B86B6B" }
+count_selected = { fg = "#0F0202", bg = "#9E7779" }
+border_style  = { fg = "#59393B" }
+
+[tabs]
+active   = { fg = "#0F0202", bg = "#7C5557", bold = true }
+inactive = { fg = "#7C5557", bg = "#4A2E2F" }
+sep_inner = { open = "", close = "" }
+sep_outer = { open = "", close = "" }
+
+[mode]
+normal_main = { fg = "#0F0202", bg = "#7C5557", bold = true }
+normal_alt  = { fg = "#C4A0A0", bg = "#4A2E2F" }
+select_main = { fg = "#0F0202", bg = "#9E7779", bold = true }
+select_alt  = { fg = "#9E7779", bg = "#4A2E2F" }
+unset_main  = { fg = "#0F0202", bg = "#B86B6B", bold = true }
+unset_alt   = { fg = "#B86B6B", bg = "#4A2E2F" }
+
+[indicator]
+parent  = { fg = "#0F0202", bg = "#7C5557" }
+current = { fg = "#0F0202", bg = "#9E7779", bold = true }
+preview = { underline = true }
+padding = { open = "", close = "" }
+
+[status]
+overall   = { fg = "#7C5557", bg = "#0F0202" }
+sep_left  = { open = "", close = "" }
+sep_right = { open = "", close = "" }
+perm_sep   = { fg = "#59393B" }
+perm_type  = { fg = "#9E7779" }
+perm_read  = { fg = "#C4A0A0" }
+perm_write = { fg = "#B86B6B" }
+perm_exec  = { fg = "#7C5557" }
+progress_label  = { fg = "#9E7779", bold = true }
+progress_normal = { fg = "#7C5557", bg = "#0F0202" }
+progress_error  = { fg = "#0F0202", bg = "#B86B6B" }
+
+[which]
+border          = { fg = "#7C5557" }
+cand            = { fg = "#C4A0A0" }
+rest            = { fg = "#7C5557" }
+desc            = { fg = "#9E7779" }
+separator_style = { fg = "#59393B" }
+
+[confirm]
+border  = { fg = "#7C5557" }
+title   = { fg = "#9E7779" }
+body    = { fg = "#D8C4C4" }
+list    = { fg = "#D8C4C4" }
+btn_yes = { fg = "#0F0202", bg = "#7C5557" }
+btn_no  = { fg = "#7C5557" }
+
+[spot]
+border = { fg = "#7C5557" }
+title  = { fg = "#9E7779" }
+tbl_col  = { fg = "#9E7779" }
+tbl_cell = { fg = "#0F0202", bg = "#7C5557" }
+
+[notify]
+title_info  = { fg = "#9E7779" }
+title_warn  = { fg = "#C4A0A0" }
+title_error = { fg = "#B86B6B" }
+icon_info  = "i"
+icon_warn  = "!"
+icon_error = "x"
+
+[pick]
+border   = { fg = "#7C5557" }
+active   = { fg = "#9E7779", bold = true }
+inactive = { fg = "#D8C4C4" }
+
+[input]
+border   = { fg = "#7C5557" }
+title    = { fg = "#9E7779" }
+value    = { fg = "#D8C4C4" }
+selected = { fg = "#0F0202", bg = "#7C5557" }
+
+[cmp]
+border   = { fg = "#7C5557" }
+active   = { fg = "#0F0202", bg = "#7C5557" }
+inactive = { fg = "#D8C4C4" }
+icon_file    = "-"
+icon_folder  = "/"
+icon_command = ">"
+
+[tasks]
+border  = { fg = "#7C5557" }
+title   = { fg = "#9E7779" }
+hovered = { fg = "#9E7779", bold = true }
+
+[help]
+border  = { fg = "#7C5557" }
+chord   = { fg = "#9E7779" }
+action  = { fg = "#D8C4C4" }
+hovered = { fg = "#0F0202", bg = "#7C5557", bold = true }
+
+[filetype]
+rules = [
+  { mime = "**/image/*", fg = "#C4A0A0" },
+  { mime = "**/{audio,video}/*", fg = "#9E7779" },
+  { mime = "**/application/{zip,rar,7z*,tar,gzip,xz,zstd,bzip*,lzma,compress,archive,cpio,arj,xar,ms-cab*}", fg = "#B86B6B" },
+  { mime = "**/application/{pdf,doc,rtf}", fg = "#C4A0A0" },
+  { mime = "vfs/{absent,stale}", fg = "#59393B" },
+  { url = "*", is = "orphan", fg = "#0F0202", bg = "#B86B6B" },
+  { url = "*", is = "exec", fg = "#C4A0A0" },
+  { url = "*", is = "dummy", fg = "#0F0202", bg = "#B86B6B" },
+  { url = "*/", is = "dummy", fg = "#0F0202", bg = "#B86B6B" },
+  { url = "*/", fg = "#9E7779", bold = true },
+  { url = "*", fg = "#D8C4C4" },
+]
+
+[icon]
+globs = []
+dirs  = []
+files = []
+exts  = []
+conds = []

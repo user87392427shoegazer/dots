@@ -1,0 +1,192 @@
+sloppy-focus               #true
+bypass-surface-visibility  #false
+log-level                  "error"  // "silent", "error", "info", "debug"
+
+appearance {
+    // inner border
+    inner-border-px    2
+    inner-border-color "#59393b"
+    inner-focus-color  "#af8d8b"
+    inner-urgent-color "#b0585c"
+    // outer border
+    outer-border-px    2
+    outer-border-color "#170506"
+    outer-focus-color  "#2a1213"
+    outer-urgent-color "#170506"
+    // gaps
+    gaps        1
+    smart-gaps  #false
+    // rootcol
+    root-color   "#170506"
+    fullscreen-bg "#000000"
+    // opacity
+    inactive-opacity 1.0
+    active-opacity   1.0
+    // spawnselect rubber-band box (see "spawn-select" below)
+    select-color        "#2a1213"   // fill
+    select-border-color "#8f686a"
+    select-border-px    2
+}
+
+input {
+    repeat-rate             50
+    repeat-delay            225
+    tap-to-click            #true
+    tap-and-drag            #true
+    drag-lock               #true
+    natural-scrolling       #false
+    disable-while-typing    #true
+    scroll-method           "2fg"          // "2fg", "edge", "button"
+    click-method            "button_areas" // "button_areas", "clickfinger"
+    accel-profile           "flat"     // "adaptive", "flat"
+    accel-speed             0.0
+    layout                  "us"           // "us", "de", "de,us", ...
+//  variant                 "nodeadkeys"
+//  options                 "grp:alt_shift_toggle"
+}
+
+// window swallowing
+swallow {
+    enabled   #true
+    border-px 4
+}
+
+// Terminals swallow=#true enables the swallow patch
+rule app-id="foot"                  swallow=#true
+// rule app-id="mouffette-select"      swallow=#true
+
+// monitor configuration example (transform = rotation of the monitor)
+// monitor name="DP-1" mode="2560x1440@240.001" scale=1.0 layout="floating" x=-1 y=-1
+// monitor name="HDMI-A-1" mode="1920x1080" transform=1 scale=1.0 layout="floating" x=-1080 y=-1
+
+// monitor rules
+monitor scale=1.0 layout="floating" x=-1 y=-1
+
+// autostart
+autostart "dbus-update-activation-environment WAYLAND_DISPLAY XDG_SESSION_TYPE=wayland XDG_CURRENT_DESKTOP=mouffette"
+autostart "/home/soqu/.local/bin/audio-up"
+autostart "swaybg -m fill -i /home/soqu/Pictures/sea-maroon.png"
+autostart "mako"
+autostart "eww open bar"
+
+// rounded corners and drop shadows (scenefx)
+eyecandy {
+    corner-radius               0       
+    corner-radius-only-floating #false  
+    shadow                      #false
+    shadow-only-floating        #false  
+    shadow-color                "#00000070"
+    shadow-focus-color          "#000000a0"
+    shadow-blur                 20      
+    shadow-focus-blur           30
+    shadow-fade-ms              150     
+    // shadow-ignore "mouffette-select" "some-app-id"
+}
+
+// infinite canvas 
+canvas {
+    enabled         #true
+    step            120     // px moved by one keyboard pan
+    clip-to-monitor #true   // windows hanging off a monitor don't show up on its neighbour
+    pinned-on-top   #true   // pinwindow'd windows are raised above the rest
+}
+
+// keybind: properties mods, key, action; extra positional arguments are the action args
+bind mods="logo" key="t" action="spawn" "foot"
+bind mods="logo" key="r" action="spawn" "tofi-drun"
+bind mods="logo" key="q" action="killclient"
+
+bind mods="logo" key="space" action="togglefloating"
+bind mods="logo" key="f" action="togglefullscreen"
+bind mods="logo" key="g" action="togglegaps"
+
+bind mods="logo" key="Tab" action="view"
+bind mods="logo" key="0" action="view" "all"
+
+bind mods="logo" key="comma" action="focusmon" "left"
+bind mods="logo" key="period" action="focusmon" "right"
+
+bind mods="logo+shift" key="less" action="tagmon" "left"
+bind mods="logo+shift" key="greater" action="tagmon" "right"
+
+bind mods="logo+shift" key="e" action="quit"
+
+// workspace
+bind mods="logo" key="1" action="view" "1"
+bind mods="logo+shift" key="1" action="tag" "1"
+
+bind mods="logo" key="2" action="view" "2"
+bind mods="logo+shift" key="2" action="tag" "2"
+
+bind mods="logo" key="3" action="view" "4"
+bind mods="logo+shift" key="3" action="tag" "4"
+
+bind mods="logo" key="4" action="view" "8"
+bind mods="logo+shift" key="4" action="tag" "8"
+
+bind mods="logo" key="5" action="view" "16"
+bind mods="logo+shift" key="5" action="tag" "16"
+
+bind mods="logo" key="6" action="view" "32"
+bind mods="logo+shift" key="6" action="tag" "32"
+
+bind mods="logo" key="7" action="view" "64"
+bind mods="logo+shift" key="7" action="tag" "64"
+
+bind mods="logo" key="8" action="view" "128"
+bind mods="logo+shift" key="8" action="tag" "128"
+
+bind mods="logo" key="9" action="view" "256"
+bind mods="logo+shift" key="9" action="tag" "256"
+
+// layout switcher
+bind mods="logo" key="o" action="setlayout" "floating"
+bind mods="logo" key="p" action="setlayout" "tile"
+bind mods="logo" key="i" action="setlayout" "toggle" // flip the layout mode floating <-> tile
+
+bind mods="logo" key="e" action="layout" "toggle"       // flip the focused container splith <-> splitv (from sway)
+
+// infinite canva features
+bind mods="logo" key="h" action="focusdir" "left"
+bind mods="logo" key="j" action="focusdir" "down"
+bind mods="logo" key="u" action="focusdir" "up"
+bind mods="logo" key="k" action="focusdir" "right"
+
+bind mods="logo+alt" key="h" action="movecanvas" "left"
+bind mods="logo+alt" key="j" action="movecanvas" "down"
+bind mods="logo+alt" key="u" action="movecanvas" "up"
+bind mods="logo+alt" key="k" action="movecanvas" "right"
+
+bind mods="logo+alt" key="0" action="homecanvas"     
+bind mods="logo+alt" key="c" action="centerwindow"    
+bind mods="logo+alt" key="m" action="pinwindow"      
+
+mousebind mods="logo" button="left" action="moveresize" "move"
+mousebind mods="logo" button="right" action="moveresize" "resize"
+mousebind mods="logo+alt" button="left" action="movecanvasmouse"
+mousebind mods="" button="left" action="movecanvasmouse" "root"
+
+// dragspawn
+mousebind mods="logo" button="middle" action="spawnselect"
+spawn-select app-id="mouffette-select" min-size=32 "foot" "--app-id=mouffette-select"
+
+// volume / mute (volctl also refreshes the bar right away)
+bind mods="" key="XF86AudioRaiseVolume" action="spawn" "/home/soqu/.local/bin/volctl" "up"
+bind mods="" key="XF86AudioLowerVolume" action="spawn" "/home/soqu/.local/bin/volctl" "down"
+bind mods="" key="XF86AudioMute" action="spawn" "/home/soqu/.local/bin/volctl" "mute"
+
+// brightness
+bind mods="" key="XF86MonBrightnessUp" action="spawn" "brightnessctl" "set" "5%+"
+bind mods="" key="XF86MonBrightnessDown" action="spawn" "brightnessctl" "set" "5%-"
+
+// power menu
+bind mods="logo+shift" key="p" action="spawn" "power"
+
+// rice-desktop
+bind mods="logo+shift" key="s" action="spawn" "shot" "area"
+bind mods="logo+alt" key="s" action="spawn" "shot" "full"
+bind mods="logo" key="v" action="spawn" "clip"
+bind mods="logo" key="n" action="spawn" "wifi"
+bind mods="logo+shift" key="p" action="spawn" "power"
+autostart "wl-paste --type text --watch cliphist store"
+autostart "wl-paste --type image --watch cliphist store"

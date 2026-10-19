@@ -1,0 +1,6 @@
+#!/bin/sh
+# prints the volume for the bar: 45 / mute / --
+out=$(wpctl get-volume @DEFAULT_AUDIO_SINK@ 2>/dev/null) || { echo "--"; exit 0; }
+case "$out" in *MUTED*) echo mute; exit 0;; esac
+v=${out#Volume: }; v=${v%% *}
+awk -v v="$v" 'BEGIN{printf "%d\n", v*100+0.5}'

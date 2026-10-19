@@ -1,0 +1,30 @@
+# tofi-drun: centred flat box, same border as the windows
+font = "Gallant Raster Term"
+font-size = 11           # points, same "11" as foot
+hint-font = true
+drun-launch = true
+fuzzy-match = true
+
+width = 340
+height = 170
+anchor = center
+corner-radius = 0
+border-width = 2
+outline-width = 0
+padding-top = 10
+padding-bottom = 10
+padding-left = 12
+padding-right = 12
+
+background-color = #170506
+border-color = #8f686a
+text-color = #cab0a8
+prompt-color = #8f686a
+selection-color = #d6c0b5
+selection-background = #59393b
+selection-background-padding = 2
+
+prompt-text = "run "
+num-results = 6
+result-spacing = 4
+text-cursor = true
