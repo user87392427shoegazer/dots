@@ -1,5 +1,4 @@
 #!/bin/sh
-# prints battery percent for the bar: 87 / 87+ (charging) / --
 for b in /sys/class/power_supply/BAT*; do
   [ -r "$b/capacity" ] || continue
   c=$(cat "$b/capacity"); s=$(cat "$b/status")
