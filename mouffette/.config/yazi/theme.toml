@@ -1,4 +1,3 @@
-# yazi: wallpaper maroon palette only (no ANSI colors, no glyph icons)
 [mgr]
 cwd = { fg = "#9E7779" }
 find_keyword  = { fg = "#C4A0A0", bold = true, italic = true, underline = true }
