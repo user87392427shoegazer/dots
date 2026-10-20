@@ -1,5 +1,4 @@
 #!/bin/sh
-# starts the pipewire stack in the right order (called once from config.kdl autostart)
 log="${XDG_STATE_HOME:-$HOME/.local/state}/audio-up.log"
 mkdir -p "$(dirname "$log")"
 pgrep -x pipewire >/dev/null || pipewire >>"$log" 2>&1 &
