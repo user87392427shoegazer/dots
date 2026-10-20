@@ -1,5 +1,4 @@
 #!/bin/sh
-# mouffette-session: run mouffette inside a dbus session and start the desktop pieces.
 LOG="${XDG_STATE_HOME:-$HOME/.local/state}/jdm-rice/session.log"
 mkdir -p "$(dirname "$LOG")"
 
