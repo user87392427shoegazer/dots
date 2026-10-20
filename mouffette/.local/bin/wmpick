@@ -1,7 +1,4 @@
 #!/bin/sh
-# wmpick: choose a session from the tty.
-# Lists wayland-sessions/*.desktop, xsessions/*.desktop (via startx), and
-# "name|command" lines from ~/.config/wmpick/extra
 i=0
 add() { i=$((i+1)); eval "N$i=\$1; C$i=\$2"; printf '  %d) %s\n' "$i" "$1"; }
 
